@@ -43,7 +43,7 @@ public class AppointmentBookingPage {
     @FindBy(id = "contact-0")
     private WebElement clickContact;
 
-    @FindBy(id = "modal-footer-btn-positive-action")
+    @FindBy(xpath = "//button[@id='modal-footer-btn-positive-action']")
     private WebElement bookAppointment;
 
     @FindBy(id = "sb_calendars")
@@ -148,7 +148,7 @@ public class AppointmentBookingPage {
         String selectedTimeSlot = selectRandomTimeslot();
         selectContactForBooking();
 
-        WebDriverHandler.waitTillVisible(bookAppointment);
+        WebDriverHandler.waitForElement(bookAppointment,30);
         bookAppointment.click();
         System.out.println("booked appointment details" + selectedDate.concat(selectedTimeSlot));
 
@@ -162,6 +162,7 @@ public class AppointmentBookingPage {
         selectContactButton.click();
         selectContact.click();
         clickContact.click();
+        WebDriverHandler.waitTillVisible(bookAppointment);
     }
 
 
@@ -189,7 +190,7 @@ public class AppointmentBookingPage {
         WebElement iframeElement = driver.findElements(By.tagName("iframe")).get(0);
         driver.switchTo().frame(iframeElement);
 
-        WebDriverHandler.waitTillVisible(appointmentDateTime);
+        WebDriverHandler.waitForElement(appointmentDateTime,20);
         ExtentTestManager.logScreenShot(datalog, WebDriverHandler.takeScreenShot(driver));
 
         datalog.info("Appointment Booked successfully");
@@ -199,18 +200,13 @@ public class AppointmentBookingPage {
 
 
     // Choosing the date for appointment booking
-    public String selectAppointmentDate(String date){
-        try {
-            datePicker.click();
-            Thread.sleep(2000);
-            WebElement dateToSelect = driver.findElements(By.xpath("//div[contains(@class, 'vdpCellContent') and text() = '" + date.replaceAll("(?<=\\d)(st|nd|rd|th)", "") + "']")).get(0);
-            dateToSelect.click();
+    public String selectAppointmentDate(String date) throws InterruptedException {
+        datePicker.click();
+        Thread.sleep(2000);
+        WebElement dateToSelect = driver.findElements(By.xpath("//div[contains(@class, 'vdpCellContent') and text() = '" + date.replaceAll("(?<=\\d)(st|nd|rd|th)", "") + "']")).get(0);
+        dateToSelect.click();
 
-            return  "Apr " + date + ", 2024, ";
-
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        return  "Apr " + date + ", 2024, ";
 
     }
 
