@@ -148,8 +148,10 @@ public class AppointmentBookingPage {
         String selectedTimeSlot = selectRandomTimeslot();
         selectContactForBooking();
 
-        WebDriverHandler.waitForElement(bookAppointment,30);
+        WebDriverHandler.waitTillVisible(bookAppointment);
+        Thread.sleep(3000);
         bookAppointment.click();
+        Thread.sleep(5000);
         System.out.println("booked appointment details" + selectedDate.concat(selectedTimeSlot));
 
        return selectedDate.concat(selectedTimeSlot);
@@ -162,7 +164,6 @@ public class AppointmentBookingPage {
         selectContactButton.click();
         selectContact.click();
         clickContact.click();
-        WebDriverHandler.waitTillVisible(bookAppointment);
     }
 
 
@@ -190,7 +191,7 @@ public class AppointmentBookingPage {
         WebElement iframeElement = driver.findElements(By.tagName("iframe")).get(0);
         driver.switchTo().frame(iframeElement);
 
-        WebDriverHandler.waitForElement(appointmentDateTime,20);
+        WebDriverHandler.waitTillVisible(appointmentDateTime);
         ExtentTestManager.logScreenShot(datalog, WebDriverHandler.takeScreenShot(driver));
 
         datalog.info("Appointment Booked successfully");

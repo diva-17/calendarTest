@@ -29,4 +29,12 @@ public class TimeConverter {
             throw new RuntimeException("Error parsing date-time string: " + timeToConvert, e);
         }
     }
+
+    public static void main(String[] args) {
+        String timeToConvert = "Apr 20, 2024, 12:00 pm"; // Replace this with an actual date-time string
+        String fromTimeStamp = "GMT-10:00 Pacific/Honolulu (HST)";
+        String toTimeStamp = "GMT+05:30 Asia/Calcutta (IST)";
+        String convertedTime = convertTime(fromTimeStamp, toTimeStamp, timeToConvert);
+        System.out.println("Converted Time: " + convertedTime);
+    }
 }
