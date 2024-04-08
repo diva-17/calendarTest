@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Appointment Booking">
+    <test name="Appointment Booking">
+        <classes>
+            <class name="AppointmentBookingTest"/>
+        </classes>
+    </test>
+</suite>
+
+
